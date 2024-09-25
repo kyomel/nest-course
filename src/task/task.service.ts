@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TaskService {
-  async createTask() {
-    return 'Create a new task service';
+  async createTask(data: CreateTaskDto) {
+    return {
+      statusCode: 200,
+      data,
+    };
   }
 }
