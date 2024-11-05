@@ -2,13 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { tasks } from './data/task';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TaskService {
+  constructor(private prisma: PrismaService) {}
   async createTask(data: CreateTaskDto) {
+    const createData = await this.prisma.tasks.create({
+      data,
+    });
     return {
       statusCode: 200,
-      data,
+      data: createData,
     };
   }
 
